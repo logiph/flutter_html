@@ -31,31 +31,32 @@ class IframeContentElement extends ReplacedElement {
     return Container(
       width: width ?? (height ?? 150) * 2,
       height: height ?? (width ?? 300) / 2,
-      child: ContainerSpan(
-        style: context.style,
-        newContext: context,
-        child: webview.WebView(
-          initialUrl: src,
-          key: key,
-          javascriptMode: sandboxMode == null || sandboxMode == "allow-scripts"
-            ? webview.JavascriptMode.unrestricted
-            : webview.JavascriptMode.disabled,
-        navigationDelegate: (request) async {
-          final result = await navigationDelegate!(NavigationRequest(
-            url: request.url,
-            isForMainFrame: request.isForMainFrame,
-          ));
-          if (result == NavigationDecision.prevent) {
-            return webview.NavigationDecision.prevent;
-          } else {
-            return webview.NavigationDecision.navigate;
-          }
-        },
-          gestureRecognizers: {
-            Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())
-          },
-        ),
-      ),
+      child: Container()
+      // ContainerSpan(
+      //   style: context.style,
+      //   newContext: context,
+      //   child: webview.WebView(
+      //     initialUrl: src,
+      //     key: key,
+      //     javascriptMode: sandboxMode == null || sandboxMode == "allow-scripts"
+      //       ? webview.JavascriptMode.unrestricted
+      //       : webview.JavascriptMode.disabled,
+      //   navigationDelegate: (request) async {
+      //     final result = await navigationDelegate!(NavigationRequest(
+      //       url: request.url,
+      //       isForMainFrame: request.isForMainFrame,
+      //     ));
+      //     if (result == NavigationDecision.prevent) {
+      //       return webview.NavigationDecision.prevent;
+      //     } else {
+      //       return webview.NavigationDecision.navigate;
+      //     }
+      //   },
+      //     gestureRecognizers: {
+      //       Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())
+      //     },
+      //   ),
+      // ),
     );
   }
 }
